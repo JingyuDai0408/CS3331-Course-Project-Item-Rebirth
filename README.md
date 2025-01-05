@@ -44,5 +44,6 @@
 如果有任何问题或建议，请通过以下方式联系：
 
 邮箱: 201503006shiyan@sjtu.edu.cn
+
 GitHub Issues: https://github.com/JingyuDai0408/CS3331-Course-Project-Item-Rebirth/issues
    
