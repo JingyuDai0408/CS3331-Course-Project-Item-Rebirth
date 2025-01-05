@@ -1,0 +1,102 @@
+@startuml
+User <|=== OrdinaryUser
+User <|=== AdministratorUser
+UserManager o=== User
+ItemManager o=== Item
+UserManager "1"-up--"1" MainWindow
+ItemManager "1"-up--"1" MainWindow
+class User {
+    - username: str
+    - password: str
+    - address: str
+    - phone: str
+    - email: str
+    - is_admin: bool
+    + __init__(str, str, str, str, str)
+    + __str__(): str
+}
+
+class OrdinaryUser {
+    - is_approved: bool
+    + __init__(str, str, str, str, str)
+    + approve(): void
+}
+
+class AdministratorUser {
+    + __init__(str, str, str, str, str)
+}
+
+class Item {
+    - name: str
+    - description: str
+    - address: str
+    - phone: str
+    - email: str
+    - item_type: str
+    - attributes: dict
+    + __init__(str, str, str, str, str, str, dict)
+    + set_attribute(str, any): void
+    + get_attribute(str): any
+    + __str__(): str
+}
+
+class ItemManager {
+    - items: list
+    - item_types: dict
+    - current_user: User
+    + __init__()
+    + add_item(Item): void
+    + delete_item(str): void
+    + search_item(str, str): list
+    + get_all_items(): list
+    + get_item_types(): list
+    + add_item_type(str, list): void
+    + update_item_type(str, list): void
+    + remove_item_type(str): void
+    + get_item_type_attributes(str): list
+}
+
+class UserManager {
+    - users: list
+    + __init__()
+    + add_user(User): void
+    + get_all_users(): list
+    + authenticate_user(str, str): User
+    + delete_user(str): bool
+    + get_user_by_username(str): User
+    + approve_user(str): void
+    + is_username_taken(str): bool
+}
+
+class MainWindow {
+    - user_manager: UserManager
+    - item_manager: ItemManager
+    - current_user: User
+    - item_type_combo: ComboBox
+    - item_name_input: LineEdit
+    - item_description_input: TextEdit
+    - item_address_input: LineEdit
+    - item_phone_input: LineEdit
+    - item_email_input: LineEdit
+    - item_attributes_inputs: dict
+    - apply_admin_button: Button
+    - item_management_tab: Tab
+    - account_management_tab: Tab
+    + __init__()
+    + show_login_window(): void
+    + show_registration_window(): void
+    + login(str, str): void
+    + register(str, str, str, str, str): void
+    + logout(): void
+    + delete_account(): void
+    + add_item(): void
+    + delete_item(str): void
+    + search_item(str, str): list
+    + handle_item_type_change(str): void
+    + display_item_list(): void
+    + set_item_attributes(Item): void
+    + apply_to_become_admin(): void
+}
+
+
+@enduml
